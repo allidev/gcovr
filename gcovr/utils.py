@@ -133,15 +133,12 @@ aliases = PathAliaser()
 # I have replaced this logic with os.walk(), which works for Python >= 2.6
 #
 def link_walker(path, exclude_dirs):
-    print('=======================')
-    print(path)
     for root, dirs, files in os.walk(os.path.abspath(path), followlinks=True):
         for exc in exclude_dirs:
             for d in dirs:
                 m = exc.match(d)
                 if m is not None:
                     dirs[:] = [d for d in dirs if d is not m.group()]
-        print(dirs)
         yield (os.path.abspath(os.path.realpath(root)), dirs, files)
 
 
