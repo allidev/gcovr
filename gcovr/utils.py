@@ -138,7 +138,7 @@ def link_walker(path, exclude_dirs):
     for root, dirs, files in os.walk(os.path.abspath(path), followlinks=True):
         for exc in exclude_dirs:
             for d in dirs:
-                m = exc.search(d)
+                m = exc.match(d)
                 if m is not None:
                     dirs[:] = [d for d in dirs if d is not m.group()]
         print(dirs)
